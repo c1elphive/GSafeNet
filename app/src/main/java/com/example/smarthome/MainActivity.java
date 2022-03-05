@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView textView = (TextView) findViewById(R.id.text);
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.10/arduino/digital/13/1";
+        String url = "http://192.168.1.10/arduino/digital/13/0";
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -64,5 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
+        queue.start();
     }
 }
