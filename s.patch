@@ -1,0 +1,15 @@
+Index: app/src/main/java/com/example/smarthome/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/smarthome/MainActivity.java	(date 1646472789000)
++++ app/src/main/java/com/example/smarthome/MainActivity.java	(date 1646472802584)
+@@ -65,6 +65,6 @@
+ // Add the request to the RequestQueue.
+         queue.add(stringRequest);
+         queue.start();
+-        
++
+     }
+ }
