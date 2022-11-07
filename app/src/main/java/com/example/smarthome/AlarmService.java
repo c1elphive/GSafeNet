@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +21,7 @@ import androidx.core.app.NotificationCompat;
 
 public class AlarmService extends AppCompatActivity {
     Button koumpi1 ;
+    Switch srvSwitch;
     TextView alarm3;
 
 
@@ -25,14 +29,33 @@ public class AlarmService extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_service);
-        alarm3=(TextView)findViewById(R.id.alarm3) ;
-        koumpi1=(Button)findViewById(R.id.koumpi1);
-        koumpi1.setOnClickListener(new View.OnClickListener() {
+
+        srvSwitch=(Switch)findViewById(R.id.switch1);
+
+
+
+        srvSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-              startService(new Intent(getApplication(),alarmBackground.class));
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked==true) {
+                    startService(new Intent(getApplication(), alarmBackground.class));
+                    Toast toast=Toast.makeText(getApplicationContext(),"Services Started",Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else{
+                    stopService(new Intent(getApplication(), alarmBackground.class));
+                    Toast toast=Toast.makeText(getApplicationContext(),"Services Stopped",Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
+
         });
+
+
+
+
+
+
 
             }
 

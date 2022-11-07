@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ import static java.lang.Thread.sleep;
 
 public class alarmBackground extends Service {
 int n = 0;
+
 String alarm2;
 private NotificationManagerCompat notificationManager;
 
@@ -58,13 +60,14 @@ final Handler handler  = new Handler();
 
     public void onDestroy(){
         super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
 
     }
 
     public void sendRequest(){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://17a6-2a02-587-7a09-d22-d8aa-f645-b410-d04.ngrok.io/readgas/32";
+        String url = " http://f199-2a02-587-7a01-e2b-a515-48ed-e28e-6163.ngrok.io/arduino/readsensors/32";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -74,10 +77,19 @@ final Handler handler  = new Handler();
 //                        Toast toast=Toast.makeText(getApplicationContext()," "+response,Toast.LENGTH_SHORT);
 //                        toast.show();
                         int nresponse=Integer.parseInt(response);
-                        if(nresponse==1){
-                            showNotification();
-                        }
+                        switch(nresponse){
+                            case 1:
+                                showNotification();
+                                break;
+                            case 2:
+                                Toast toast=Toast.makeText(getApplicationContext(),"fire",Toast.LENGTH_SHORT);
+                                toast.show();
+                                break;
 
+
+                            default:
+                                //
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
